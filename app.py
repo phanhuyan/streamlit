@@ -1,9 +1,5 @@
 import streamlit as st
-```
 
-2. Define a function to create the two columns:
-
-```python
 def create_columns(left_column_width=None, right_column_width=None):
   """Creates two columns in a Streamlit app.
 
