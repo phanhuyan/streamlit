@@ -22,8 +22,6 @@ def create_columns(left_column_width=None, right_column_width=None):
 
   left_column, right_column = st.columns([left_column_width, right_column_width])
 
-  # Make the left column scrollable.
-  left_column.container(use_container_width=True)
 
   return left_column, right_column
 
