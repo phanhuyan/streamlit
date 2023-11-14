@@ -1,46 +1,70 @@
 import streamlit as st
+```
 
-# Define the HTML and CSS code
-html_code = """
-<style>
-.scroll-container {
-    display: flex;
-}
+2. Define a function to create the two columns:
 
-.left-column {
-    width: 50%;
-    height: 400px;
-    overflow-y: scroll;
-}
+```python
+def create_columns(left_column_width=None, right_column_width=None):
+  """Creates two columns in a Streamlit app.
 
-.right-column {
-    width: 50%;
-}
-</style>
+  Args:
+    left_column_width: The width of the left column, as a percentage of the total
+      width. If None, the left column will be 50% wide.
+    right_column_width: The width of the right column, as a percentage of the total
+      width. If None, the right column will be 50% wide.
 
-<div class="scroll-container">
-    <div class="left-column">
-        </div>
-    <div class="right-column">
-        </div>
-</div>
-"""
+  Returns:
+    A tuple of two Streamlit columns.
+  """
 
-# Display the content using st.markdown
-st.markdown(html_code, unsafe_allow_html=True)
+  if left_column_width is None:
+    left_column_width = 50
+  if right_column_width is None:
+    right_column_width = 50
 
-# Import necessary libraries
+  left_column, right_column = st.columns([left_column_width, right_column_width])
+
+  # Make the left column scrollable.
+  left_column.container(use_container_width=True)
+
+  return left_column, right_column
+
 import streamlit as st
 
-# Create two beta columns
-left_col, right_col = st.beta_columns(2)
+def create_columns(left_column_width=None, right_column_width=None):
+  """Creates two columns in a Streamlit app.
 
-# Add content to both columns
-with left_col:
-    # Your content for the left column (scrollable)
-    for i in range(100):
-        st.write(f"This is item {i + 1}")
+  Args:
+    left_column_width: The width of the left column, as a percentage of the total
+      width. If None, the left column will be 50% wide.
+    right_column_width: The width of the right column, as a percentage of the total
+      width. If None, the right column will be 50% wide.
 
-with right_col:
-    # Your content for the right column (static)
-    st.write("This is the static right column")
+  Returns:
+    A tuple of two Streamlit columns.
+  """
+
+  if left_column_width is None:
+    left_column_width = 50
+  if right_column_width is None:
+    right_column_width = 50
+
+  left_column, right_column = st.columns([left_column_width, right_column_width])
+
+  # Make the left column scrollable.
+  left_column.container(use_container_width=True)
+
+  return left_column, right_column
+
+if __name__ == '__main__':
+
+  left_column, right_column = create_columns()
+
+  # Add content to the left column.
+  left_column.header('Scrollable Column')
+  for i in range(100):
+    left_column.write(f'Item {i}')
+
+  # Add content to the right column.
+  right_column.header('Static Column')
+  right_column.write('This column is static.')
